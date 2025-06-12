@@ -1,3 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
+html{
+    width: 100%;
+    height: 100%;
+}
 body{
     display: flex;
     flex-direction: column;
@@ -8,20 +16,38 @@ body{
     opacity: 1.0;
 }
 
+h1{
+    font-family: "alegreya", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+button{
+    font-family: "aleo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .display{
     display: flex;
     flex-direction: column;
+    flex: 1;
     align-items: center;
+    justify-content: space-between;
     padding: 50px;
     width: 500px;
-    height: auto;
-    box-sizing: border-box;
+    height: 800px;
 }
 
 .bookCard{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 20px;
+    font-family: "aleo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .addBtn{
@@ -29,7 +55,6 @@ body{
 }
 
 dialog{
-    box-sizing: border-box;
     width: 400px;
 }
 
@@ -44,4 +69,14 @@ form{
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+}
+
+.cardBtns{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.delete .toggle{
+    height: 30px;
 }
