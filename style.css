@@ -2,25 +2,41 @@
     box-sizing: border-box;
 }
 
-html{
+html, body{
     width: 100%;
+}
+
+html{
     height: 100%;
+    background: #b4ced9;
+    background: linear-gradient(233deg, rgba(180, 206, 217, 1) 0%, rgba(180, 143, 207, 1) 50%, rgba(255, 250, 214, 1) 100%);
 }
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
 }
 
 ::backdrop{
     opacity: 1.0;
 }
 
-h1{
+.header{
+    width: 100%;
+    background-color: white;
+    box-shadow: 5px 5px 10px;
+}
+h1, h2{
     font-family: "alegreya", serif;
     font-weight: 700;
     font-style: normal;
 }
+
+h2{
+    margin-top: 0;
+}
+
 
 button{
     font-family: "aleo", sans-serif;
@@ -28,6 +44,17 @@ button{
     font-style: normal;
 }
 
+.container{
+    width: 500px;
+    height: 800px;
+}
+
+.content{
+    display: flex;
+    width: 900px;
+    justify-content: space-between;
+
+}
 .display{
     display: flex;
     flex-direction: column;
@@ -35,8 +62,9 @@ button{
     align-items: center;
     justify-content: space-between;
     padding: 50px;
-    width: 500px;
-    height: 800px;
+    font-family: "aleo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .bookCard{
@@ -79,4 +107,22 @@ form{
 
 .delete .toggle{
     height: 30px;
+}
+
+.statsViewBox{
+    margin-top: 15%;
+    margin-bottom: auto;
+    border: 2px dashed;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.statsView{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+    opacity: 0.8;
+    width: 300px;
+    height: 50px;
 }

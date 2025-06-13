@@ -1,6 +1,6 @@
 const myLibrary = [];
 const libDisplay = document.querySelector(".display");
-let finished = false;
+let statsView = document.querySelector(".stats");
 
 function Book(title, author, pages){
     if (!new.target) throw Error("You must use the 'new' operator to call this constructor");
@@ -14,6 +14,10 @@ function Book(title, author, pages){
     };
 }
 
+Book.prototype.markFinished = function() {
+    this.isRead = !this.isRead;
+}
+
 function addBookToLibrary(title, author, pages){
     const book = new Book(title, author, pages);
     myLibrary.push(book);
@@ -25,21 +29,29 @@ addBookToLibrary("No Ordinary Love", "Myah Ariel" , 289);
 addBookToLibrary("Things Fall Apart", "Chinua Achebe", 300);
 console.log(myLibrary)
 
-Book.prototype.markFinished = function() {
-    this.isRead = !this.isRead;
-    finished = !finished
+function updateStats(){
+    const readCount = myLibrary.filter(book => book.isRead).length;
+    console.log(myLibrary.filter(book => book.isRead));
+    statsView.textContent = `Total Books: ${myLibrary.length} | Finished: ${readCount} | Unread: ${myLibrary.length - readCount}`;
 }
 
 function displayBook(){
     libDisplay.textContent = "";
+    if (myLibrary.length === 0){
+        libDisplay.textContent = "No books 📚 in your library yet. Click New Book to add one!";
+    }
     for (let i = 0; i < myLibrary.length; i++){
         let bookCard = document.createElement('div');
         bookCard.setAttribute(
-            "style", "background-color: LightBlue; box-sizing: border-box; border-radius: 20px; width: 400px; height: 100px; box-shadow: 5px 5px 10px grey"
+            "style", "background-color: white; box-sizing: border-box; border-radius: 20px; width: 400px; height: 100px; box-shadow: 5px 5px 10px grey"
         );
         bookCard.classList.add("bookCard");
         bookCard.dataset.id = myLibrary[i].id;
         bookCard.textContent = myLibrary[i].info();
+        if (myLibrary[i].isRead){
+            bookCard.style.color = "white";
+            bookCard.style.backgroundColor = "grey";
+        }
 
         let Btns = document.createElement('div');
         let deleteBtn = document.createElement('button');
@@ -55,32 +67,39 @@ function displayBook(){
             if (index != -1){
                 myLibrary.splice(index, 1);
                 bookCard.remove();
+                updateStats();
             }
         })
 
         let toggleRead = document.createElement("button");
         toggleRead.textContent = "Mark as finished";
+        if (myLibrary[i].isRead){
+            toggleRead.textContent = "Mark as unread";
+        }
         toggleRead.classList.add("toggle");
         Btns.appendChild(toggleRead);
 
         toggleRead.addEventListener("click", () => {
             myLibrary[i].markFinished();
-            if (finished === true){
+            if (myLibrary[i].isRead){
                 bookCard.style.color = "white";
-                bookCard.style.backgroundColor = "#005A9C";
+                bookCard.style.backgroundColor = "grey";
                 toggleRead.textContent = "Mark as unread";
             } else {
                 bookCard.style.color = "black";
-                bookCard.style.backgroundColor = "LightBlue";
+                bookCard.style.backgroundColor = "white";
                 toggleRead.textContent = "Mark as finished";
             }
+            updateStats();
         })
         
         libDisplay.appendChild(bookCard);
     }
+    updateStats();
 }
 
 displayBook()
+
 
 const addBtn = document.querySelector(".addBtn");
 const newBookForm = document.querySelector(".addBook");
@@ -99,7 +118,7 @@ newBookForm.addEventListener("close", () => {
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const title = document.getElementById("title");
+    const title = document.querySelector("#title");
     const author = document.querySelector("#author");
     const pages = document.querySelector("#pages");
 
@@ -107,9 +126,5 @@ submitBtn.addEventListener("click", (e) => {
         addBookToLibrary(title.value, author.value, pages.value);
         displayBook();
     }
-    title.value = "";
-    author.value = "";
-    pages.value = "";
-
     newBookForm.close();
 });
