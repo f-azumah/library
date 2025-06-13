@@ -23,10 +23,10 @@ function addBookToLibrary(title, author, pages){
     myLibrary.push(book);
 }
 
-addBookToLibrary("Wahala", "Nikki May", 384);
-addBookToLibrary("The Three of Us", "Ore Agbaje-Williams", 150);
-addBookToLibrary("No Ordinary Love", "Myah Ariel" , 289);
-addBookToLibrary("Things Fall Apart", "Chinua Achebe", 300);
+// addBookToLibrary("Wahala", "Nikki May", 384);
+// addBookToLibrary("The Three of Us", "Ore Agbaje-Williams", 150);
+// addBookToLibrary("No Ordinary Love", "Myah Ariel" , 289);
+// addBookToLibrary("Things Fall Apart", "Chinua Achebe", 300);
 console.log(myLibrary)
 
 function updateStats(){
